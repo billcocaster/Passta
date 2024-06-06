@@ -72,6 +72,7 @@ class passta:
                         ,(userName,password))
             conn.commit()
             conn.close()
+        else: messagebox.showerror('fail','please enter valid username and password to register')
             
     def login_user(self):
         username = self.userNameEntry.get()
@@ -87,17 +88,32 @@ class passta:
                     self.login_window.destroy()
                     self.open_user_interface()
                 else:
-                    messagebox.showerror('fail','wrong username or password')
-            else: messagebox.showerror('fail','wrong username or password')
-        else: messagebox.showerror('fail','please enter valid username or password')
+                    self.window_messages_login('Error','Wrong username or password')
+            else: self.window_messages_login('Error','Wrong username or password')
+        else: self.window_messages_login('Error','Please enter valid username and password')
 
     def open_user_interface(self):
         self.user_interface = ctk.CTk()
         self.user_interface.title('Wellcome')
-        self.user_interface.geometry('500x500')
-        self.user_interface.state('zoomed')
+        self.window_center(self.user_interface,1000,600)
         self.user_interface.mainloop()
             
+            
+            
+    def window_messages_login(self, title, message):
+        window = ctk.CTkToplevel(self.login_window)
+        window.title(title)
+        self.window_center(window,250,125)
+        window.resizable(width=False, height=False)
+        
+        window.transient(self.login_window)
+        window.grab_set()
+        
+        errorLabel = ctk.CTkLabel(window,text=message,wraplength=250)
+        errorLabel.grid(row=0,column=0,padx=20,pady=20)
+        
+        okButton = ctk.CTkButton(window,text="OK",command=window.destroy)
+        okButton.grid(pady=5,row=1,column=0,sticky='ns')
             
     def window_center(self, window, width, height):
         screen_width = window.winfo_screenwidth()
