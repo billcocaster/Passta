@@ -9,13 +9,13 @@ class passta:
     def __init__(self):
         self.login_window = ctk.CTk()
         self.login_window.title('Login')
-        self.window_center(self.login_window, 500, 500)
+        self.window_center(self.login_window, 500, 275)
         self.login_window.resizable(width=False, height=False)
         self.login_window.grab_set()
         
         
-        #self.login_screen()
-        self.open_user_interface()       
+        self.login_screen()
+        #self.open_user_interface()       
         self.login_window.mainloop()
         
     
@@ -39,7 +39,7 @@ class passta:
         self.userNameEntry = ctk.CTkEntry(loginFrame,placeholder_text='Username',width=460,height=40)
         self.userNameEntry.grid(row=0,column=0,columnspan=2,pady=10)
         
-        self.passwordEntry = ctk.CTkEntry(loginFrame,placeholder_text='Password',width=460,height=40)
+        self.passwordEntry = ctk.CTkEntry(loginFrame,placeholder_text='Password',width=460,height=40,show='*')
         self.passwordEntry.grid(row=1,column=0,columnspan=2,pady=(0,10),padx=10)
             
         loginButton = ctk.CTkButton(loginFrame,text='Login',fg_color='#48773B',font=buttonFont,command=self.login_user)
